@@ -1,5 +1,6 @@
 package spring.tacos.Controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
-
-    private static final org.slf4j.Logger log =
-            org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
