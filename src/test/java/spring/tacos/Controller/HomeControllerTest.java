@@ -1,4 +1,4 @@
-package spring.tacos;
+package spring.tacos.Controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
