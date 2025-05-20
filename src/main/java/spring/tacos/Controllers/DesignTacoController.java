@@ -1,12 +1,8 @@
 package spring.tacos.Controllers;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import spring.tacos.Model.Ingredient;
 import spring.tacos.Model.Ingredient.Type;
 import spring.tacos.Model.Taco;
@@ -16,14 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
+
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
 
-//    private static final org.slf4j.Logger log =
-//            org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+    private static final org.slf4j.Logger log =
+            org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
@@ -60,6 +56,15 @@ public class DesignTacoController {
     @GetMapping
     public String showDesignForm(){
         return "design";
+    }
+
+    @PostMapping
+    public String processTaco(Taco taco,
+                              @ModelAttribute TacoOrder tacoOrder) {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+
+        return "redirect:/orders/current";
     }
 
     private Iterable<Ingredient> filterByType(
