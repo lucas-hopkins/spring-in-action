@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import spring.tacos.Model.TacoOrder;
 
+import javax.validation.Valid;
+
 @Slf4j
 @Controller
 @RequestMapping("/orders")
@@ -24,10 +26,10 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(TacoOrder tacoOrder, Errors errors,
+    public String processOrder(@Valid TacoOrder tacoOrder, Errors errors,
                                SessionStatus sessionStatus) {
         if(errors.hasErrors()) {
-            return "design";
+            return "orderForm";
         }
 
         log.info("Order submitted: {}", tacoOrder);
